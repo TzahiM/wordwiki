@@ -1,0 +1,10 @@
+#ignore by django
+db.sqlite3
+*.log
+*.pot
+#ignore thumbnails created by windows
+Thumbs.db
+#ignore python
+*.pyc
+
+
