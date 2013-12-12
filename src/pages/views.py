@@ -14,7 +14,8 @@ def list_of_all_pages(request):
     
 def details(request, pk):
     page = get_object_or_404(Page , name  = pk)
-    return render(request, 'pages/detail.html', {'page': page})
+    uml_list = page.as_html()
+    return render(request, 'pages/detail.html', {'page': page , 'uml_list' : uml_list})
 
     
  

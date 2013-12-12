@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.core.validators import MaxLengthValidator
 from django.db import models
+from django.utils.safestring import mark_safe
 
 # Create your models here.
 
@@ -16,3 +17,13 @@ class Page(models.Model):
     def get_absolute_url(self):
         return( self.name)
 #        return reverse('views.details',  args= [self.name])
+    def as_html(self):
+        lower_text = self.body_text.lower()
+        words_list = lower_text.split()
+        url_list = []
+        for item in words_list:
+            url_list.append( mark_safe ('<a href = "/word/' + item + '">' + item + '</a>'))
+        return url_list
+            
+
+        
