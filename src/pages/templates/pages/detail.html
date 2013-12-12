@@ -1,12 +1,16 @@
-<h1>{{ poll.question }}</h1>
+<h1>{{ page.name }}</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'polls:vote' poll.id %}" method="post">
-{% csrf_token %}
-{% for choice in poll.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-{% endfor %}
-<input type="submit" value="Vote" />
-</form>
+	<p> created: {{page.create_date}}</p>
+	<p> updated: {{page.update_date}}</p>
+{% if page.header %}
+    <h2>Titled:  {{page.header}}</h2> 
+{% else %}
+    <p>No title.</p>
+{% endif %}
+{% if page.body_text %}
+    <p> {{page.body_text}}</p> 
+{% else %}
+    <p>No text.</p>
+{% endif %}

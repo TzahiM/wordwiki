@@ -1,21 +1,21 @@
 #from django.shortcuts import render
 #from django.http import HttpResponse
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import render, get_object_or_404
 from pages.models import Page
 
+# Create your views here.
+
+
+
 def list_of_all_pages(request):
-    
-#    text_string = "<ul>\n"
-#    for page in Page.objects.order_by('-name'):
-#        text_string += "<li>" + page.name + "</li>\n" 
-#    text_string += "</ull>\n"
-#    return HttpResponse( text_string)
     latest_pages_list = Page.objects.all().order_by('-name')
     context = {'latest_pages_list': latest_pages_list}
     return render(request, 'pages/page_list.html', context)
     
+def details(request, pk):
+    page = get_object_or_404(Page , name  = pk)
+    return render(request, 'pages/detail.html', {'page': page})
+
     
  
     
