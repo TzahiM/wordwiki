@@ -10,7 +10,7 @@
     <p>No title.</p>
 {% endif %}
 {% if page.body_text %}
-    <p> {{page.body_text}}</p> 
+    <p> {{page.body_text|linebreaks}} </p> 
 {% else %}
     <p>No text.</p>
 {% endif %}

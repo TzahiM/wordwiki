@@ -1,5 +1,6 @@
+from django.core.urlresolvers import reverse
+from django.core.validators import MaxLengthValidator
 from django.db import models
-from django.core.validators import MaxLengthValidator 
 
 # Create your models here.
 
@@ -12,4 +13,6 @@ class Page(models.Model):
     body_text = models.TextField(blank=True)
     def __unicode__(self):  # Python 3: def __str__(self):
         return self.name
-
+    def get_absolute_url(self):
+        return( self.name)
+#        return reverse('views.details',  args= [self.name])
