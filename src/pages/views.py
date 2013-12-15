@@ -1,6 +1,8 @@
 #from django.shortcuts import render
 #from django.http import HttpResponse
 
+from django.core.urlresolvers import reverse
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import UpdateView, CreateView
 from pages.models import Page
@@ -27,7 +29,10 @@ def list_of_all_pages(request):
 
 
 def details(request, pk):
-    page = get_object_or_404(Page , name  = pk)
+    try:
+        page = Page.objects.get( name = pk)
+    except Page.DoesNotExist:
+        return HttpResponseRedirect(reverse('create'))
     uml_list = page.as_html()
     return render(request, 'pages/detail.html', {'page': page , 'uml_list' : uml_list})
 
