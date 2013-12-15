@@ -2,17 +2,21 @@
 #from django.http import HttpResponse
 
 from django.shortcuts import render, get_object_or_404
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView
 from pages.models import Page
 
 # Create your views here.
+class PageCreate(CreateView):
+    model = Page
+
+    fields = ['name', 'header', 'body_text']
+    template_name = 'pages/page_create_form.html'
 
 class PageUpdate(UpdateView):
     model = Page
 
     fields = ['name', 'header', 'body_text']
     template_name = 'pages/page_update_form.html'
-#    success_url = ''
 
 
 def list_of_all_pages(request):
